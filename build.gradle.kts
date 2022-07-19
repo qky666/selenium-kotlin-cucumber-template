@@ -37,7 +37,9 @@ allure {
 }
 
 tasks.test {
-    useTestNG { suiteXmlFiles = listOf(File("src/test/resources/testngDesktop.xml")) }
+    // Uncomment desired line
+    // useTestNG { suiteXmlFiles = listOf(File("src/test/resources/testngDesktop.xml")) }
+    useTestNG { suiteXmlFiles = listOf(File("src/test/resources/testngMobile.xml")) }
 }
 
 tasks.withType<KotlinCompile> {

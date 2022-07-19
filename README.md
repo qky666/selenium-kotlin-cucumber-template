@@ -36,7 +36,6 @@ Selenide-POM: https://github.com/qky666/selenide-pom
 Cucumber: https://cucumber.io/
 
 ## TODO
-- Parallelization
 - Retest
 - Test data: ¿JSON? ¿Data class?
 - Cloud: LambdaTest

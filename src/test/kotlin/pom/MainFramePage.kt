@@ -7,7 +7,7 @@ import com.github.qky666.selenidepom.Page
 open class MainFramePage : Page() {
     @Required("desktop") val mainMenu = MainMenuWidget()
     @Required("mobile") val mobileMenuButton = Selenide.element("button.custom-menu-btn-flotante")
-    @Suppress("unused") val mobileMenu = MobileMenuWidget()
+    val mobileMenu = MobileMenuWidget()
     val cookiesBanner = CookiesBannerWidget()
 }
 
