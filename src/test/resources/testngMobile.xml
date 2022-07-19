@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Mobile Tests Suite" data-provider-thread-count="2">
+<suite name="Mobile Tests Suite" data-provider-thread-count="4">
     <test name="TestNG MTP Mobile tests" enabled="true">
         <classes>
             <class name="cucumber.runner.CucumberTestNgMobileTestRunner"/>
+            <class name="cucumber.runner.CucumberTestNgFailedMobileTestRunner"/>
         </classes>
     </test>
 </suite>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Desktop Tests Suite" data-provider-thread-count="2">
+<suite name="Desktop Tests Suite" data-provider-thread-count="4">
+    <parameter name="browser" value="firefox"/>
     <test name="TestNG MTP Desktop tests" enabled="true">
-        <parameter name="browser" value="firefox"/>
         <classes>
             <class name="cucumber.runner.CucumberTestNgDesktopTestRunner"/>
+            <class name="cucumber.runner.CucumberTestNgFailedDesktopTestRunner"/>
         </classes>
     </test>
 </suite>

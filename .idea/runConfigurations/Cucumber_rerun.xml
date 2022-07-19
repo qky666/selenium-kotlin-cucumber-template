@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Cucumber rerun" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+    <option name="FILE_PATH" value="$PROJECT_DIR$/build/test-results/cucumber/failed_scenarios.txt" />
+    <option name="GLUE" value="cucumber.steps" />
+    <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+    <module name="selenium-kotlin-cucumber-template.test" />
+    <shortenClasspath name="NONE" />
+    <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
