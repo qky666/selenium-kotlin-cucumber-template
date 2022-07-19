@@ -37,7 +37,7 @@ allure {
 }
 
 tasks.test {
-    useTestNG { suiteXmlFiles = listOf(File("src/test/resources/cucumberTestNg.xml")) }
+    useTestNG { suiteXmlFiles = listOf(File("src/test/resources/testngDesktop.xml")) }
 }
 
 tasks.withType<KotlinCompile> {

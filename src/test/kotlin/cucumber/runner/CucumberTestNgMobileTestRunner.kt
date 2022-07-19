@@ -1,10 +1,7 @@
 package cucumber.runner
 
-import com.codeborne.selenide.Selenide
-import com.github.qky666.selenidepom.SPConfig
-import io.cucumber.testng.AbstractTestNGCucumberTests
 import io.cucumber.testng.CucumberOptions
-import org.apache.logging.log4j.kotlin.Logging
+import org.testng.annotations.BeforeClass
 import org.testng.annotations.BeforeMethod
 import org.testng.annotations.Test
 
@@ -14,19 +11,24 @@ import org.testng.annotations.Test
     tags = "@mobile",
     glue = ["cucumber.steps"],
     plugin = [
-        "cucumber.listener.ScreenshotCucumberListener",
+        "cucumber.listener.CucumberListener",
         "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
         "pretty",
         "json:build/test-results/json/cucumber_desktop.json",
         "rerun:build/test-results/cucumber/desktop_failed_scenarios.txt"
     ]
 )
-class CucumberTestNgMobileTestRunner : AbstractTestNGCucumberTests(), Logging {
-    @BeforeMethod(description = "Open base URL in desktop browser", alwaysRun = true)
+class CucumberTestNgMobileTestRunner : CucumberTestNgTestRunnerBase() {
+    private val mobile = true
+    private val browser = "chrome"
+
+    @BeforeMethod(description = "Open base URL in mobile browser", alwaysRun = true)
     fun beforeMethod() {
-        SPConfig.setupBasicMobileBrowser()
-        // Open URL
-        Selenide.open("")
-        logger.info { "URL opened in mobile mode"}
+        setupAndOpenBrowser(browser, mobile)
+    }
+
+    @BeforeClass(description = "Write environment variables to Allure report", alwaysRun = true)
+    fun beforeClass() {
+        storeEnvironmentProperties(browser, mobile)
     }
 }
