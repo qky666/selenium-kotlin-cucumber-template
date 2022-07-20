@@ -18,7 +18,7 @@ dependencies {
     val cucumberVersion = "7.4.1"
 
     testImplementation("com.codeborne:selenide:6.6.6")
-    testImplementation("com.github.qky666:selenide-pom:0.9.5")
+    testImplementation("com.github.qky666:selenide-pom:0.10.0")
     testImplementation("io.cucumber:cucumber-java:$cucumberVersion")
     testImplementation("io.cucumber:cucumber-testng:$cucumberVersion")
     testImplementation("io.qameta.allure:allure-cucumber7-jvm:2.18.1")

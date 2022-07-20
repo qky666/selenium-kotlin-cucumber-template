@@ -25,7 +25,7 @@ class MtpStepsDefinition: Logging {
 
     @Cuando("Se navega a Servicios -> Aseguramiento de la calidad")
     fun navigateToQualityAssurance() {
-        if (SPConfig.getPomVersion().equals("mobile", true)) {
+        if (SPConfig.pomVersion.equals("mobile", true)) {
             mainFramePage.mobileMenuButton.click()
             mainFramePage.mobileMenu.shouldLoadRequired()
             mainFramePage.mobileMenu.shouldBeCollapsed()
