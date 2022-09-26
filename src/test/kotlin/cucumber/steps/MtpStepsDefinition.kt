@@ -1,8 +1,9 @@
 package cucumber.steps
 
-import com.codeborne.selenide.Condition
+import com.codeborne.selenide.Condition.visible
 import com.codeborne.selenide.Selenide
-import com.github.qky666.selenidepom.SPConfig
+import com.github.qky666.selenidepom.config.SPConfig
+import com.github.qky666.selenidepom.pom.shouldLoadRequired
 import io.cucumber.java.es.Cuando
 import io.cucumber.java.es.Dado
 import io.cucumber.java.es.Entonces
@@ -27,10 +28,10 @@ class MtpStepsDefinition: Logging {
     fun navigateToQualityAssurance() {
         if (SPConfig.pomVersion.equals("mobile", true)) {
             mainFramePage.mobileMenuButton.click()
-            mainFramePage.mobileMenu.shouldLoadRequired()
-            mainFramePage.mobileMenu.shouldBeCollapsed()
-            mainFramePage.mobileMenu.services.click()
-            mainFramePage.mobileMenu.servicesQualityAssurance.shouldBe(Condition.visible).click()
+            val mobileMenu = mainFramePage.mobileMenu
+            mobileMenu.shouldLoadRequired().shouldBeCollapsed()
+            mobileMenu.services.click()
+            mobileMenu.servicesQualityAssurance.shouldBe(visible).click()
         } else {
             // pomVersion = "desktop"
             mainFramePage.mainMenu.services.hover()
@@ -45,6 +46,6 @@ class MtpStepsDefinition: Logging {
 
     @Entonces("El mensaje de aviso de las cookies no se muestra")
     fun cookiesMessageNotVisible() {
-        mainFramePage.cookiesBanner.self.shouldNotBe(Condition.visible)
+        mainFramePage.cookiesBanner.shouldNotBe(visible)
     }
 }

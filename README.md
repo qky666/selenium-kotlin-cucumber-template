@@ -36,7 +36,7 @@ Selenide-POM: https://github.com/qky666/selenide-pom
 Cucumber: https://cucumber.io/
 
 ## TODO
-- Test data: ¿JSON? ¿Data class?
+- Test data: ¿JSON? ¿Data class? ¿Properties? Maybe Properties
 - Cloud: LambdaTest
 - CI/CD: Azure Devops
 
