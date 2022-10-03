@@ -20,7 +20,7 @@ class MtpStepsDefinition: Logging {
 
     @Dado("Se aceptan la cookies")
     fun acceptCookies() {
-        mainFramePage.cookiesBanner.acceptCookies()
+        mainFramePage.acceptCookies()
         logger.info { "Cookies accepted" }
     }
 
