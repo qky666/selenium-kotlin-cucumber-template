@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 group = "es.mtp"
-version = "0.12.3"
+version = "0.13.0"
 
 repositories {
     mavenCentral()
@@ -15,10 +15,10 @@ plugins {
 }
 
 dependencies {
-    val cucumberVersion = "7.8.0"
+    val cucumberVersion = "7.8.1"
 
-    testImplementation("com.codeborne:selenide:6.8.1")
-    testImplementation("com.github.qky666:selenide-pom:0.12.3")
+    testImplementation("com.codeborne:selenide:6.9.0")
+    testImplementation("com.github.qky666:selenide-pom:0.13.0")
     testImplementation("io.cucumber:cucumber-java:$cucumberVersion")
     testImplementation("io.cucumber:cucumber-testng:$cucumberVersion")
     testImplementation("io.qameta.allure:allure-cucumber7-jvm:2.19.0")
