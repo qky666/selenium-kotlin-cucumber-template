@@ -5,7 +5,7 @@ import com.github.qky666.selenidepom.config.SPConfig
 import io.cucumber.testng.AbstractTestNGCucumberTests
 import org.testng.annotations.DataProvider
 import java.io.File
-import java.util.*
+import java.util.Properties
 
 abstract class CucumberTestNgTestRunnerBase : AbstractTestNGCucumberTests() {
     private val defaultAllureResultsPath = "build/allure-results/"
@@ -35,7 +35,7 @@ abstract class CucumberTestNgTestRunnerBase : AbstractTestNGCucumberTests() {
         }
         val allureResultsDirectory = allureProperties.getProperty("allure.results.directory", defaultAllureResultsPath)
         val environmentPropertiesPath =
-            if (allureResultsDirectory.endsWith("/")) "${allureResultsDirectory}environment.properties" else "${allureResultsDirectory}/environment.properties"
+            if (allureResultsDirectory.endsWith("/")) "${allureResultsDirectory}environment.properties" else "$allureResultsDirectory/environment.properties"
         val environmentProperties = Properties()
         if (browser != null) {
             environmentProperties.setProperty("Browser", browser)

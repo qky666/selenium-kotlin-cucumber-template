@@ -7,7 +7,7 @@ Característica: Web de MTP
 
   Antecedentes:
     * Se accede a la web de MTP
-    * Se aceptan la cookies
+    * Se aceptan las cookies
 
   @desktop @mobile
   Escenario: Acceso a Aseguramiento de la calidad
@@ -25,7 +25,7 @@ Característica: Web de MTP
     * El mensaje de aviso de las cookies no se muestra
 
   @desktop
-  Esquema del escenario: Búsqueda en la web de MTP
+  Esquema del escenario: Búsqueda en la web de MTP <search>
     * Se busca el término '<search>'
     * El número de páginas de resultados para la búsqueda '<search>' es <resultsPages>
     * Se navega a la página <resultsPages> de resultados de la búsqueda
