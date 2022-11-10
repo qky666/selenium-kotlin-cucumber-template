@@ -1,6 +1,6 @@
 # language: es
 
-#noinspection NonAsciiCharacters
+#noinspection NonAsciiCharacters,CucumberTableInspection
 Característica: Web de MTP
   Validación de la Web de MTP.
   Vamos a usarlo a modo de ejemplo.
@@ -10,9 +10,12 @@ Característica: Web de MTP
     * Se aceptan las cookies
 
   @desktop @mobile
-  Escenario: Acceso a Aseguramiento de la calidad
+  Esquema del escenario: Acceso a Aseguramiento de la calidad. Navegador: <Navegador>; Modelo: <Modelo>; Idioma: <Idioma>
     * Se navega a Servicios -> Aseguramiento de la calidad
     * Se carga la página Aseguramiento de la calidad
+    Ejemplos:
+      | Navegador | Modelo  | Idioma |
+      | chrome    | desktop | es     |
 
   @desktop @mobile
   Escenario: Error forzado

@@ -23,8 +23,7 @@ class MtpStepsDefinition : Es, Logging {
     init {
         Dado("Se accede a la web de MTP") {
             Selenide.open("")
-            SPConfig.lang = "es"
-            homePage.shouldLoadRequired()
+            homePage.shouldLoadRequired(lang="es")
         }
 
         Dado("Se aceptan las cookies") {

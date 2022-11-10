@@ -3,6 +3,7 @@
 package cucumber.steps
 
 import com.codeborne.selenide.Selenide
+import com.github.qky666.selenidepom.config.SPConfig
 import io.cucumber.java8.Scenario
 import io.cucumber.java8.Es
 
@@ -11,6 +12,13 @@ import org.openqa.selenium.OutputType
 class CucumberHooks: Es{
 
     init {
+        Before { scenario: Scenario ->
+            SPConfig.selenideConfig.browser(getBrowserFromTestName(scenario.name))
+            SPConfig.model = getModelFromTestName(scenario.name)
+            SPConfig.lang = getLanguageFromTestName(scenario.name)
+
+        }
+
         After { scenario: Scenario ->
             if (scenario.isFailed) {
                 val screenshot = Selenide.screenshot(OutputType.BYTES)
@@ -22,5 +30,17 @@ class CucumberHooks: Es{
             }
             Selenide.closeWebDriver()
         }
+    }
+
+    private fun getBrowserFromTestName(name: String): String {
+        return name.substringAfter("Navegador: ").substringBefore(";")
+    }
+
+    private fun getModelFromTestName(name: String): String {
+        return name.substringAfter("Modelo: ").substringBefore(";")
+    }
+
+    private fun getLanguageFromTestName(name: String): String {
+        return name.substringAfter("Idioma: ").substringBefore(";")
     }
 }
