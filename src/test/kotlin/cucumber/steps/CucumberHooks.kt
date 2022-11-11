@@ -16,7 +16,11 @@ class CucumberHooks: Es{
             SPConfig.selenideConfig.browser(getBrowserFromTestName(scenario.name))
             SPConfig.model = getModelFromTestName(scenario.name)
             SPConfig.lang = getLanguageFromTestName(scenario.name)
-
+            if (SPConfig.model.contentEquals("mobile", ignoreCase = true)) {
+                SPConfig.setupBasicMobileBrowser()
+            } else {
+                SPConfig.setupBasicDesktopBrowser()
+            }
         }
 
         After { scenario: Scenario ->

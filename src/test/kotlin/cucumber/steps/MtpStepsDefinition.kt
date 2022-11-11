@@ -23,12 +23,16 @@ class MtpStepsDefinition : Es, Logging {
     init {
         Dado("Se accede a la web de MTP") {
             Selenide.open("")
-            homePage.shouldLoadRequired(lang="es")
+            homePage.shouldLoadRequired(lang = "es")
+        }
+
+        Dado("Se establece el idioma") {
+            homePage.shouldLoadRequired(lang = "es")
+            homePage.setLangIfNeeded()
         }
 
         Dado("Se aceptan las cookies") {
             mainFramePage.acceptCookies()
-            logger.info { "Cookies accepted" }
         }
 
         Cuando("Se navega a Servicios -> Aseguramiento de la calidad") {
@@ -65,22 +69,39 @@ class MtpStepsDefinition : Es, Logging {
             searchResultsPage.shouldLoadRequired().breadcrumb.activeBreadcrumbItem.shouldHave(exactText("Results: $search"))
             searchResultsPage.breadcrumb.breadcrumbItems[0].shouldHave(exactText("Home"))
             Assert.assertEquals(searchResultsPage.searchResults.shouldLoadRequired().count(), maxResultsPerPage)
-            searchResultsPage.pagination.shouldLoadRequired().currentPage.shouldHave(exactText("1"))
-            searchResultsPage.pagination.nextPage.shouldBe(visible)
-            searchResultsPage.pagination.pagesLinks.shouldHave(size(resultsPages))[resultsPages - 2].shouldHave(
-                exactText(resultsPages.toString())
-            )
+
+
+            if (resultsPages > 1) {
+                searchResultsPage.pagination.shouldLoadRequired().currentPage.shouldHave(exactText("1"))
+                searchResultsPage.pagination.nextPage.shouldBe(visible)
+                searchResultsPage.pagination.pagesLinks.shouldHave(size(resultsPages))[resultsPages - 2].shouldHave(
+                    exactText(resultsPages.toString())
+                )
+            } else {
+                searchResultsPage.pagination.shouldNotBe(visible)
+            }
         }
 
-        Cuando("Se navega a la página {int} de resultados de la búsqueda") { page: Int ->
-            searchResultsPage.shouldLoadRequired().pagination.shouldLoadRequired().pagesLinks.find(exactText(page.toString()))
-                .click()
-            searchResultsPage.shouldLoadRequired().pagination.shouldLoadRequired().currentPage.shouldHave(exactText(page.toString()))
+        Cuando("Se navega a la página {int} de {int} de resultados de la búsqueda") { page: Int, totalPages: Int ->
+            if (totalPages == 1 && page == 1) {
+                searchResultsPage.shouldLoadRequired().pagination.shouldNotBe(visible)
+            } else {
+                searchResultsPage.shouldLoadRequired().pagination.shouldLoadRequired().pagesLinks.find(exactText(page.toString()))
+                    .click()
+                searchResultsPage.shouldLoadRequired().pagination.shouldLoadRequired().currentPage.shouldHave(
+                    exactText(page.toString())
+                )
+            }
+
         }
 
-        Entonces("La página de resultados mostrada es la última") {
-            searchResultsPage.shouldLoadRequired().pagination.nextPage.should(disappear)
-            searchResultsPage.pagination.previousPage.shouldBe(visible)
+        Entonces("La página mostrada es la última del total de {int} páginas de resultados de la búsqueda") { totalPages: Int ->
+            if (totalPages == 1) {
+                searchResultsPage.shouldLoadRequired().pagination.shouldNotBe(visible)
+            } else {
+                searchResultsPage.shouldLoadRequired().pagination.nextPage.should(disappear)
+                searchResultsPage.pagination.previousPage.shouldBe(visible)
+            }
         }
 
         Entonces("El número de resultados para la búsqueda mostrados es {int}") { results: Int ->
@@ -93,7 +114,12 @@ class MtpStepsDefinition : Es, Logging {
             val result =
                 searchResultsPage.shouldLoadRequired().searchResults.filterBy(text(search)).shouldHave(size(1))[0]
             result.title.shouldHave(exactText(search))
-            result.text.shouldHave(text(textBody))
+
+            if (textBody.isNotEmpty()) {
+                result.text.shouldHave(text(textBody))
+            } else {
+                result.text.shouldNotBe(visible)
+            }
         }
     }
 }
