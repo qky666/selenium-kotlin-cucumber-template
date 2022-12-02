@@ -4,6 +4,7 @@ package cucumber.steps
 
 import com.codeborne.selenide.Selenide
 import com.github.qky666.selenidepom.config.SPConfig
+import com.github.qky666.selenidepom.data.TestData
 import io.cucumber.java8.Scenario
 import io.cucumber.java8.Es
 
@@ -21,6 +22,7 @@ class CucumberHooks: Es{
             } else {
                 SPConfig.setupBasicDesktopBrowser()
             }
+            TestData.init()
         }
 
         After { scenario: Scenario ->
