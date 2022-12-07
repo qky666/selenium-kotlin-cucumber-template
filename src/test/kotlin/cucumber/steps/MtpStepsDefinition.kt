@@ -7,7 +7,6 @@ import com.codeborne.selenide.Condition.disappear
 import com.codeborne.selenide.Condition.exactText
 import com.codeborne.selenide.Condition.text
 import com.codeborne.selenide.Condition.visible
-import com.codeborne.selenide.Selenide
 import com.github.qky666.selenidepom.config.SPConfig
 import com.github.qky666.selenidepom.pom.shouldLoadRequired
 import io.cucumber.java8.Es
@@ -22,12 +21,10 @@ class MtpStepsDefinition : Es, Logging {
 
     init {
         Dado("Se accede a la web de MTP") {
-            Selenide.open("")
-            homePage.shouldLoadRequired(lang = "es")
+            homePage.open()
         }
 
         Dado("Se establece el idioma") {
-            homePage.shouldLoadRequired(lang = "es")
             homePage.setLangIfNeeded()
         }
 

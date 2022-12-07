@@ -22,7 +22,7 @@ class CucumberHooks: Es{
             } else {
                 SPConfig.setupBasicDesktopBrowser()
             }
-            TestData.init()
+            TestData.init("prod")
         }
 
         After { scenario: Scenario ->

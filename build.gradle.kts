@@ -11,7 +11,7 @@ repositories {
 plugins {
     kotlin("jvm") version "1.7.20"
     id("io.qameta.allure") version "2.11.2"
-    id("com.github.ben-manes.versions") version "0.43.0"
+    id("com.github.ben-manes.versions") version "0.44.0"
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
