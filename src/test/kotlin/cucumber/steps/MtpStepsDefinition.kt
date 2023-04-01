@@ -67,7 +67,6 @@ class MtpStepsDefinition : Es, Logging {
             searchResultsPage.breadcrumb.breadcrumbItems[0].shouldHave(exactText("Home"))
             Assert.assertEquals(searchResultsPage.searchResults.shouldLoadRequired().count(), maxResultsPerPage)
 
-
             if (resultsPages > 1) {
                 searchResultsPage.pagination.shouldLoadRequired().currentPage.shouldHave(exactText("1"))
                 searchResultsPage.pagination.nextPage.shouldBe(visible)
@@ -89,7 +88,6 @@ class MtpStepsDefinition : Es, Logging {
                     exactText(page.toString())
                 )
             }
-
         }
 
         Entonces("La página mostrada es la última del total de {int} páginas de resultados de la búsqueda") { totalPages: Int ->
@@ -103,7 +101,8 @@ class MtpStepsDefinition : Es, Logging {
 
         Entonces("El número de resultados para la búsqueda mostrados es {int}") { results: Int ->
             Assert.assertEquals(
-                searchResultsPage.shouldLoadRequired().searchResults.shouldLoadRequired().count(), results
+                searchResultsPage.shouldLoadRequired().searchResults.shouldLoadRequired().count(),
+                results
             )
         }
 

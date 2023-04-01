@@ -5,15 +5,16 @@ package cucumber.steps
 import com.codeborne.selenide.Selenide
 import com.github.qky666.selenidepom.config.SPConfig
 import com.github.qky666.selenidepom.data.TestData
-import io.cucumber.java8.Scenario
 import io.cucumber.java8.Es
-
+import io.cucumber.java8.Scenario
 import org.openqa.selenium.OutputType
 
-class CucumberHooks: Es{
+class CucumberHooks : Es {
 
     init {
         Before { scenario: Scenario ->
+            // Configure webdriver
+            SPConfig.resetConfig()
             SPConfig.selenideConfig.browser(getBrowserFromTestName(scenario.name))
             SPConfig.model = getModelFromTestName(scenario.name)
             SPConfig.lang = getLanguageFromTestName(scenario.name)
@@ -22,10 +23,14 @@ class CucumberHooks: Es{
             } else {
                 SPConfig.setupBasicDesktopBrowser()
             }
+            SPConfig.setCurrentThreadDriver()
+
+            // Set env
             TestData.init("prod")
         }
 
         After { scenario: Scenario ->
+            // Attach screenshot
             if (scenario.isFailed) {
                 val screenshot = Selenide.screenshot(OutputType.BYTES)
                 if (screenshot != null) {
@@ -34,7 +39,9 @@ class CucumberHooks: Es{
                     scenario.log("Scenario is failed but there is no screenshot available in ${scenario.name}")
                 }
             }
-            Selenide.closeWebDriver()
+
+            // Quit webdriver
+            SPConfig.quitCurrentThreadDriver()
         }
     }
 
