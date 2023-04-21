@@ -33,16 +33,19 @@ class MtpStepsDefinition : Es, Logging {
         }
 
         Cuando("Se navega a Servicios -> Aseguramiento de la calidad") {
-            if (SPConfig.model.equals("mobile", true)) {
-                mainFramePage.shouldLoadRequired().mobileMenu.mobileMenuButton.click()
-                val mobileMenu = mainFramePage.mobileMenuPopUp
-                mobileMenu.shouldLoadRequired().shouldBeCollapsed()
-                mobileMenu.services().click()
-                mobileMenu.servicesQualityAssurance().shouldBe(visible).click()
-            } else {
-                // model = "desktop"
-                mainFramePage.shouldLoadRequired().desktopMenu.services.hover()
-                mainFramePage.desktopMenu.servicesPopUp.qualityAssurance.click()
+            when (SPConfig.model) {
+                "mobile" -> {
+                    mainFramePage.shouldLoadRequired().mobileMenu.mobileMenuButton.click()
+                    val mobileMenu = mainFramePage.mobileMenuPopUp
+                    mobileMenu.shouldLoadRequired().shouldBeCollapsed()
+                    mobileMenu.services().click()
+                    mobileMenu.servicesQualityAssurance().shouldBe(visible).click()
+                }
+                "desktop" -> {
+                    mainFramePage.shouldLoadRequired().desktopMenu.services.hover()
+                    mainFramePage.desktopMenu.servicesPopUp.qualityAssurance.click()
+                }
+                else -> throw RuntimeException("Model ${SPConfig.model} not found")
             }
         }
 

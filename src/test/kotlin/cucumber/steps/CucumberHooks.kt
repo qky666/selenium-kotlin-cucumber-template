@@ -14,15 +14,15 @@ class CucumberHooks : Es {
     init {
         Before { scenario: Scenario ->
             // Configure webdriver
-            SPConfig.resetConfig()
-            SPConfig.selenideConfig.browser(getBrowserFromTestName(scenario.name))
-            SPConfig.model = getModelFromTestName(scenario.name)
-            SPConfig.lang = getLanguageFromTestName(scenario.name)
-            if (SPConfig.model.contentEquals("mobile", ignoreCase = true)) {
-                SPConfig.setupBasicMobileBrowser()
-            } else {
-                SPConfig.setupBasicDesktopBrowser()
+            val browser = getBrowserFromTestName(scenario.name)
+            val model = getModelFromTestName(scenario.name)
+            val lang = getLanguageFromTestName(scenario.name)
+            when (model) {
+                "mobile" -> SPConfig.setupBasicMobileBrowser()
+                "desktop" -> SPConfig.setupBasicDesktopBrowser(browser)
+                else -> throw RuntimeException("Model ${SPConfig.model} not found")
             }
+            SPConfig.lang = lang
             SPConfig.setCurrentThreadDriver()
 
             // Set env
