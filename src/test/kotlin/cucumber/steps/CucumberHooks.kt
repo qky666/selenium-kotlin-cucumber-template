@@ -13,6 +13,8 @@ class CucumberHooks : Es {
 
     init {
         Before { scenario: Scenario ->
+            SPConfig.resetConfig()
+
             // Configure webdriver
             val browser = getBrowserFromTestName(scenario.name)
             val model = getModelFromTestName(scenario.name)

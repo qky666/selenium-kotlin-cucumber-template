@@ -1,7 +1,7 @@
 import ru.vyarus.gradle.plugin.python.task.PythonTask
 
 group = "es.mtp"
-version = "0.17.0"
+version = "0.17.1"
 
 repositories {
     mavenCentral()
@@ -21,8 +21,8 @@ dependencies {
     val cucumberVersion = "7.11.2"
 
     testImplementation("org.testng:testng:7.7.1")
-    testImplementation("com.codeborne:selenide:6.13.0")
-    testImplementation("com.github.qky666:selenide-pom:0.17.0")
+    testImplementation("com.codeborne:selenide:6.13.1")
+    testImplementation("com.github.qky666:selenide-pom:0.17.1")
     testImplementation("io.cucumber:cucumber-java8:$cucumberVersion")
     testImplementation("io.cucumber:cucumber-testng:$cucumberVersion")
     testImplementation("io.qameta.allure:allure-cucumber7-jvm:2.21.0")
