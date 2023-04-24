@@ -78,5 +78,4 @@ open class MainFramePage : Page(), Logging {
     }
 }
 
-@Suppress("unused")
 val mainFramePage = MainFramePage()

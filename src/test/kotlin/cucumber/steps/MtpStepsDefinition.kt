@@ -14,6 +14,7 @@ import org.apache.logging.log4j.kotlin.Logging
 import org.testng.Assert
 import pom.common.mainFramePage
 import pom.pages.home.homePage
+import pom.pages.services.qualityAssurancePage
 import pom.pages.services.servicesPage
 import pom.searchresults.searchResultsPage
 
@@ -47,6 +48,7 @@ class MtpStepsDefinition : Es, Logging {
                 }
                 else -> throw RuntimeException("Model ${SPConfig.model} not found")
             }
+            qualityAssurancePage.shouldLoadRequired()
         }
 
         Entonces("Se carga la página Aseguramiento de la calidad") {
